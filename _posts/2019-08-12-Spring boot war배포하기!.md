@@ -1,0 +1,42 @@
+---
+title:  "SpringBoot JSP-WAR 배포"
+excerpt: "SpringBoot WAR 배포로 변경하기!"
+categories:
+  - Develop
+tags:
+  - Spring
+  - Spring Boot
+toc: true  
+---
+
+이번 프로젝트를 진행하면서 규모가 크지 않다는 판단하에  
+개인적으로 가지고있던 관리자 템플릿을 사옹하기로 하였다.  
+하지만 Spring boot에 적용하려다보니 기존 템플릿이 Jsp로 되어있어서  
+적용하는데 애를 좀 썼다. Spring Boot는 기본적으로 Jsp 사용을 권장하지 않는다.  
+또한 Jar 배포시에는 Jsp를 사용할수가 없기때문에 War 배포를 해야하는문제가 생겼다.  
+앞으로는 Thymeleaf나 다른 템플릿 엔진을 사용하겠지만,  
+언제 또 Spring boot에 Jsp 조합을 사용할지 모르기때문에
+적용했던 방식을 적어본다.
+
+## Maven 의존성 추가
+pom.xml 에 아래 코드를 추가.
+<script src="https://gist.github.com/vakhais/b1ccf8726428a4a665a4003f1c46cd4f.js?file=pom_1.xml&slice=1:8"></script>
+
+## JSP 폴더 셋팅
+application.properties 에 아래 내용을 추가
+<script src="https://gist.github.com/vakhais/b1ccf8726428a4a665a4003f1c46cd4f.js?file=application.properties"></script>
+
+## WAR 프로젝트로 변경
+Spring boot에서 일반 실행가능 Jar로 배포시에 Jsp 호출이 되지 않는다.
+해당프로젝트를 War로 변경하자.
+pom.xml에 아래코드를 추가.
+<script src="https://gist.github.com/vakhais/b1ccf8726428a4a665a4003f1c46cd4f.js?file=pom_2.xml&slice=1:8"></script>
+
+## Boot Webapplication.java 수정
+스프링 부트 기본 메인 클래스를 외부 톰캣에서 구동하기위해 변경한다.
+@SpringBootApplication 처리 되어있는 클래스를 
+아래 클래스로 변경한다.  
+(로컬에서는 기존 그대로 사용하여 내장으로 개발하자. 서버배포시에는 기존 클래스 주석후 아래 클래스로 적용)
+<script src="https://gist.github.com/vakhais/b1ccf8726428a4a665a4003f1c46cd4f.js?file=ServletInitializer.java&slice=1:8"></script>
+
+이제 War로 배포후 서버 외부 톰캣에 올려 구동하면 된다.
