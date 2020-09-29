@@ -1,0 +1,39 @@
+I"�<p>관리자 bo 작업시 종종 datatable을 써야하는 경우가 있다.<br />
+테이블 정렬 등의 요구사항이 있을시엔 datatable이 정말 편하다.</p>
+
+<p><a href="https://datatables.net/">datatable 공식사이트</a></p>
+
+<p>일반 렌더링 예제는 많이 있는데 server 렌더링은 예제가 많이 없는듯 하여<br />
+샘플 코드를 남겨놓는다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> 
+    
+    <span class="kd">var</span> <span class="nx">param</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">?group_code=</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#group_code option:selected</span><span class="dl">'</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span> 
+    
+    <span class="nx">param</span> <span class="o">=</span> <span class="nb">encodeURI</span><span class="p">(</span><span class="nx">param</span><span class="p">);</span> 
+    <span class="nx">commonCodeDataTable</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#datatable</span><span class="dl">'</span><span class="p">).</span><span class="nx">DataTable</span><span class="p">({</span> 
+        <span class="na">bFilter</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
+        <span class="na">select</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> 
+        <span class="dl">"</span><span class="s2">processing</span><span class="dl">"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span> 
+        <span class="dl">"</span><span class="s2">serverSide</span><span class="dl">"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span> 
+        <span class="dl">"</span><span class="s2">stateSave</span><span class="dl">"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span> 
+        <span class="dl">"</span><span class="s2">ajax</span><span class="dl">"</span><span class="p">:{</span> 
+            <span class="dl">"</span><span class="s2">url</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">/admin/getCommonCodeJsonList</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">param</span> 
+        <span class="p">},</span> 
+        <span class="dl">"</span><span class="s2">columns</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span> 
+            <span class="p">{</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">common_code</span><span class="dl">"</span><span class="p">},</span> 
+            <span class="p">{</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">common_value</span><span class="dl">"</span><span class="p">},</span> 
+            <span class="p">{</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">common_desc</span><span class="dl">"</span><span class="p">},</span> 
+            <span class="p">{</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">common_seq</span><span class="dl">"</span><span class="p">},</span> 
+        <span class="p">]</span> 
+    <span class="p">});</span> 
+    <span class="nx">commonCodeDataTable</span><span class="p">.</span><span class="nx">column</span><span class="p">(</span> <span class="mi">3</span> <span class="p">).</span><span class="nx">visible</span><span class="p">(</span> <span class="kc">false</span> <span class="p">);</span> 
+    
+    <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#group_code</span><span class="dl">'</span><span class="p">).</span><span class="nx">change</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> 
+        <span class="kd">var</span> <span class="nx">param</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">?group_code=</span><span class="dl">"</span><span class="o">+</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span> 
+        <span class="nx">param</span> <span class="o">=</span> <span class="nb">encodeURI</span><span class="p">(</span><span class="nx">param</span><span class="p">);</span> 
+        <span class="nx">commonCodeDataTable</span><span class="p">.</span><span class="nx">ajax</span><span class="p">.</span><span class="nx">url</span><span class="p">(</span><span class="dl">"</span><span class="s2">/admin/getCommonCodeJsonList</span><span class="dl">"</span><span class="o">+</span><span class="nx">param</span><span class="p">).</span><span class="nx">load</span><span class="p">();</span> 
+    <span class="p">});</span> 
+<span class="p">});</span>
+</code></pre></div></div>
+:ET

@@ -1,0 +1,18 @@
+I"�<p>thymeleaf는 해도해도 적응이 안된다..<br />
+하지만 어쩌겠나…</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tr</span> <span class="na">th:each=</span><span class="s">"data : ${noticeList}"</span><span class="nt">&gt;</span> 
+    <span class="nt">&lt;td</span> <span class="nt">&gt;&lt;/td&gt;</span> 
+    <span class="nt">&lt;td&gt;</span> 
+        <span class="nt">&lt;a</span> <span class="na">th:text=</span><span class="s">"${data.notice_title}"</span> <span class="na">th:href=</span><span class="s">"@{/admin/noticeInfo(notice_seq=${data.notice_seq}notice_lang_code=${data.notice_lang_code})}"</span><span class="nt">&gt;&lt;/a&gt;</span>
+    <span class="nt">&lt;/td&gt;</span> 
+    <span class="nt">&lt;td</span> <span class="na">th:text=</span><span class="s">"${data.popup_yn}"</span><span class="nt">&gt;&lt;/td&gt;</span> 
+    <span class="nt">&lt;td&gt;</span> 
+        <span class="nt">&lt;block</span> <span class="na">th:each=</span><span class="s">" lang : ${#strings.arraySplit(data.save_lang,',')}"</span> <span class="na">th:remove=</span><span class="s">"tag"</span><span class="nt">&gt;</span> 
+            <span class="nt">&lt;img</span> <span class="na">th:src=</span><span class="s">"@{localhost:8080/} + ${lang}"</span> <span class="na">width=</span><span class="s">"20"</span> <span class="na">height=</span><span class="s">"20"</span> <span class="na">th:alt=</span><span class="s">"${lang}"</span><span class="nt">/&gt;</span> 
+        <span class="nt">&lt;/block&gt;</span> 
+    <span class="nt">&lt;/td&gt;</span> 
+    <span class="nt">&lt;td</span> <span class="na">th:text=</span><span class="s">"${data.reg_date}"</span><span class="nt">&gt;&lt;/td&gt;</span> <span class="nt">&lt;td</span> <span class="na">th:text=</span><span class="s">"${data.notice_viewcnt}"</span><span class="nt">&gt;&lt;/td&gt;</span> 
+<span class="nt">&lt;/tr&gt;</span>
+</code></pre></div></div>
+:ET

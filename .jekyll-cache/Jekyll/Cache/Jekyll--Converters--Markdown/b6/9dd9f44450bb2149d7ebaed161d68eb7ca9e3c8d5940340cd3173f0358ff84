@@ -1,0 +1,7 @@
+I"L<ul class="toc__menu">
+  <li><a href="#maven-의존성-추가">Maven 의존성 추가</a></li>
+  <li><a href="#jsp-폴더-셋팅">JSP 폴더 셋팅</a></li>
+  <li><a href="#war-프로젝트로-변경">WAR 프로젝트로 변경</a></li>
+  <li><a href="#boot-webapplicationjava-수정">Boot Webapplication.java 수정</a></li>
+</ul>
+:ET

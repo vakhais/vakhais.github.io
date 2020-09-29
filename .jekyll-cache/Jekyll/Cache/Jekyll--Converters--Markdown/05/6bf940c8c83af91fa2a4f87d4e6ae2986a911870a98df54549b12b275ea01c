@@ -1,0 +1,13 @@
+I"C	<p>spring boot + spring security 사용중인데,<br />
+ 일반적인 ajax call 하니 시큐리티에서 막아버리는것 같다.</p>
+
+<p>head 태그 사이에 추가하자</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"_csrf"</span> <span class="na">th:content=</span><span class="s">"${_csrf.token}"</span><span class="nt">&gt;&lt;meta</span> <span class="na">name=</span><span class="s">"_csrf_header"</span> <span class="na">th:content=</span><span class="s">"${_csrf.headerName}"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>ajax 호출 전에 추가 (공통으로 셋팅해놓으면 편하다.)</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">meta[name='_csrf']</span><span class="dl">"</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="dl">"</span><span class="s2">content</span><span class="dl">"</span><span class="p">);</span>  
+<span class="kd">var</span> <span class="nx">header</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">meta[name='_csrf_header']</span><span class="dl">"</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="dl">"</span><span class="s2">content</span><span class="dl">"</span><span class="p">);</span>  
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ajaxSend</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">xhr</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="nx">header</span><span class="p">,</span> <span class="nx">token</span><span class="p">);</span> <span class="p">});</span>
+</code></pre></div></div>
+:ET

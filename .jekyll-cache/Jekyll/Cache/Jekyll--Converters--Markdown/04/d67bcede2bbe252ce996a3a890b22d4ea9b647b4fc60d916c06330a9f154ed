@@ -1,0 +1,21 @@
+I"
+<p>레이어 팝업으로 이미지 원본 사이즈를 출력해야하는데<br />
+개발자 및 퍼블리셔가 바빳던 관계로 라이브러리를 사용하였다.</p>
+
+<p><a href="http://dimsemenov.com/plugins/magnific-popup/">magnific-popup 공식사이트</a></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/css/magnific-popup.css"</span> <span class="nt">/&gt;</span> 
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/js/jquery.magnific-popup.js"</span><span class="nt">&gt;</span> 
+
+<span class="kd">function</span> <span class="nx">goPicZoom</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="nx">$</span><span class="p">.</span><span class="nx">magnificPopup</span><span class="p">.</span><span class="nx">open</span><span class="p">({</span> 
+        <span class="na">items</span><span class="p">:</span> <span class="p">{</span> 
+            <span class="na">src</span><span class="p">:</span> <span class="err">이미지주소</span><span class="p">,</span> 
+        <span class="p">},</span> 
+        <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">image</span><span class="dl">'</span><span class="p">,</span> 
+        <span class="na">closeOnContentClick</span> <span class="p">:</span> <span class="kc">true</span><span class="p">,</span> 
+        <span class="na">tClose</span> <span class="p">:</span> <span class="nx">tooltip</span><span class="p">.</span><span class="nx">TOOLTIP_CLOSE</span> 
+    <span class="p">});</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+:ET
